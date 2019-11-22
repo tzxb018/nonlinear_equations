@@ -12,7 +12,7 @@ public class main {
 		String eq = "x^3 - x - 1";
 		int a = 0;
 		int b = 2;
-		double eps = .0000000000001;
+		double eps = .01;
 		double start = 2;
 		int N = 8;
 		
@@ -144,7 +144,7 @@ public class main {
 	// Using the definition of a derivative and using a small value for h
 	public static double derivative(String eq, double var)
 	{
-		double h = .00001;
+		double h = .000000001;
 		double f_prime = (solveFunction(eq, var + h) - solveFunction(eq, var))/(h);
 		return f_prime;
 	}

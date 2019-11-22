@@ -1,5 +1,3 @@
-
-
 import java.util.ArrayList;
 import net.objecthunter.exp4j.Expression;
 import net.objecthunter.exp4j.ExpressionBuilder;
@@ -12,9 +10,9 @@ public class main {
 		String eq = "x^3 - x - 1";
 		int a = 0;
 		int b = 2;
-		double eps = .01;
+		double eps = .000001;
 		double start = 2;
-		int N = 8;
+		int N = 10;
 		
 		bisection (eq , a, b, eps, N);
 		System.out.println();
@@ -28,7 +26,7 @@ public class main {
 		int n = 1; // counter for the number of interval
 		double[] returnIntervals = new double[2];
 		
-		System.out.printf("%s %8s %8s %10s %10s\n", "n", "a", "b", "x", "f_x");
+		System.out.printf("%-5s %-8s %-8s %-10s %-10s\n", "n", "a", "b", "x", "f_x");
 		while (n <= N)
 		{
 			double x = (a + b)/2; // find the midpoint of the intervals
@@ -58,7 +56,7 @@ public class main {
 				a = x;
 			}
 			
-		    System.out.printf( "%s %8.3f %8.3f %10.5f %10.5f\n", n, a, b, x, f_x);		    
+		    System.out.printf( "%-5s %-8.3f %-8.3f %-10.5f %-10.5f\n", n, a, b, x, f_x);		    
 			n++;
 		}
 		
@@ -71,7 +69,7 @@ public class main {
 	{
 		int n = 1; // counter for the number of interval
 		double[] returnIntervals = new double[2];
-		System.out.printf("%s %8s %8s %10s %10s\n", "n", "a", "b", "x", "f_x");
+		System.out.printf("%-5s %-8s %-8s %-10s %-10s\n", "n", "a", "b", "x", "f_x");
 
 		while (n <= N)
 		{
@@ -104,7 +102,7 @@ public class main {
 				a = x;
 			}
 			
-		    System.out.printf( "%s %8.3f %8.3f %10.5f %10.5f\n", n, a, b, x, f_x);		    
+		    System.out.printf( "%-5s %-8.3f %-8.3f %-10.5f %-10.5f\n", n, a, b, x, f_x);		    
 			n++;
 		}
 		
@@ -115,15 +113,15 @@ public class main {
 	
 	public static double newtonsMethod(String eq, double start, double eps)
 	{
-		int n = 1;
+		int n = 0;
 		double x = start;
-	    System.out.printf( "%s %12s %12s\n", "n", "x", "f_x");	
+	    System.out.printf( "%-5s %-12s %-12s\n", "n", "x", "f_x");	
 
 		while (solveFunction(eq, x) > eps)
 		{
 			x = x - (solveFunction(eq, x)/derivative(eq, x));
 			double f_x = solveFunction(eq, x);
-		    System.out.printf( "%s %12.7f %12.7f\n", n, x, f_x);	
+		    System.out.printf( "%-5s %-12.7f %-12.7f\n", n, x, f_x);	
 		    n ++; 
 		}
 		

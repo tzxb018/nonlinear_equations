@@ -7,12 +7,14 @@ public class main {
 	public static void main(String[] args) {
 
 		// Starting variables
-		String eq = "-2e^(-cos(3x))+2";
-		int a = 2;
-		int b = 3;
+		String eq = "e^x + 1";
+		int a = 0;
+		int b = 1;
+		
+		// constant variables
 		double eps = .00001;
-		double start = 2;
-		int N = (int)(Math.log((b-a)/eps)/Math.log(2));
+		double start = 0;
+		int N = (int)(Math.log((b-a)/eps)/Math.log(2)); // limits the number of trails run in bisection and false position
 		
 		printResult(bisection (eq , a, b, eps, N), "bisection");
 		System.out.println();
@@ -30,7 +32,10 @@ public class main {
 		System.out.println();
 		if (result[0] == result[1])
 		{
+			if (result[0] == Double.NEGATIVE_INFINITY || result[0] == Double.POSITIVE_INFINITY) System.out.println("No answer found");
+			else {
 			System.out.printf("%s algorithm finds answer of: %.8f", algo, result[0]);
+			}
 		}
 		else
 		{
@@ -135,7 +140,7 @@ public class main {
 		double x = start;
 	    System.out.printf( "%-5s %-12s %-12s\n", "n", "x", "f_x");	
 
-		while (Math.abs(solveFunction(eq, x)) > eps)
+		while (Math.abs(solveFunction(eq, x)) > eps && n < 1000) 
 		{
 			x = x - (solveFunction(eq, x)/derivative(eq, x));
 			double f_x = solveFunction(eq, x);

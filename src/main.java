@@ -10,15 +10,33 @@ public class main {
 		String eq = "x^3 - x - 1";
 		int a = 0;
 		int b = 2;
-		double eps = .000001;
+		double eps = .00001;
 		double start = 2;
-		int N = 10;
+		int N = (int)(Math.log((b-a)/eps)/Math.log(2));
 		
-		bisection (eq , a, b, eps, N);
+		printResult(bisection (eq , a, b, eps, N), "bisection");
 		System.out.println();
-		falsePosition(eq, a, b, eps, N);
+		printResult(falsePosition(eq, a, b, eps, N), "false position");
 		System.out.println();
-		newtonsMethod(eq, start, eps);
+		printResult(newtonsMethod(eq, start, eps), "newton's method");
+	}
+	
+	// print statement
+	// will be inputting in an array of length two and which algorithm was used
+	// this represents the range of the answer given by the algorithm
+	// if they are the same, print the exact result, else print the range given by the algorithm
+	public static void printResult(double[] result, String algo)
+	{
+		System.out.println();
+		if (result[0] == result[1])
+		{
+			System.out.printf("%s algorithm finds answer of: %.6f", algo, result[0]);
+		}
+		else
+		{
+			System.out.printf("%s algorithm finds approximate answer between [%.5f, %.5f]", algo, result[0], result[1]);
+		}
+		System.out.println("\n============================================================================");
 	}
 	
 	public static double[] bisection (String eq, double a, double b, double eps, int N)
@@ -56,7 +74,7 @@ public class main {
 				a = x;
 			}
 			
-		    System.out.printf( "%-5s %-8.3f %-8.3f %-10.5f %-10.5f\n", n, a, b, x, f_x);		    
+		    System.out.printf( "%-5s %-8.3f %-8.3f %-10.5f %-5.5f\n", n, a, b, x, f_x);		    
 			n++;
 		}
 		
@@ -111,7 +129,7 @@ public class main {
 		return returnIntervals; // if the iteration limit has been reached, return the intervals around the x
 	}
 	
-	public static double newtonsMethod(String eq, double start, double eps)
+	public static double[] newtonsMethod(String eq, double start, double eps)
 	{
 		int n = 0;
 		double x = start;
@@ -124,8 +142,10 @@ public class main {
 		    System.out.printf( "%-5s %-12.7f %-12.7f\n", n, x, f_x);	
 		    n ++; 
 		}
-		
-		return 0.0;
+		double[] out = new double[2];
+		out[0] = x;
+		out[1] = x;
+		return out;
 	}
 	
 	
@@ -142,7 +162,7 @@ public class main {
 	// Using the definition of a derivative and using a small value for h
 	public static double derivative(String eq, double var)
 	{
-		double h = .000000001;
+		double h = .0000000000001;
 		double f_prime = (solveFunction(eq, var + h) - solveFunction(eq, var))/(h);
 		return f_prime;
 	}

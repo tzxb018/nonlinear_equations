@@ -7,9 +7,9 @@ public class main {
 	public static void main(String[] args) {
 
 		// Starting variables
-		String eq = "x^3 - x - 1";
-		int a = 0;
-		int b = 2;
+		String eq = "-2e^(-cos(3x))+2";
+		int a = 2;
+		int b = 3;
 		double eps = .00001;
 		double start = 2;
 		int N = (int)(Math.log((b-a)/eps)/Math.log(2));
@@ -30,11 +30,11 @@ public class main {
 		System.out.println();
 		if (result[0] == result[1])
 		{
-			System.out.printf("%s algorithm finds answer of: %.6f", algo, result[0]);
+			System.out.printf("%s algorithm finds answer of: %.8f", algo, result[0]);
 		}
 		else
 		{
-			System.out.printf("%s algorithm finds approximate answer between [%.5f, %.5f]", algo, result[0], result[1]);
+			System.out.printf("%s algorithm finds approximate answer between [%.8f, %.8f]", algo, result[0], result[1]);
 		}
 		System.out.println("\n============================================================================");
 	}
@@ -49,7 +49,7 @@ public class main {
 		{
 			double x = (a + b)/2; // find the midpoint of the intervals
 			
-			if (x - a <= eps)
+			if (Math.abs(x - a) <= eps)
 			{
 				returnIntervals[0] = x;
 				returnIntervals[1] = x;
@@ -95,7 +95,7 @@ public class main {
 			double x = (a * solveFunction(eq, b) - b * solveFunction(eq, a))/(solveFunction(eq, b) - solveFunction(eq, a));
 		
 			
-			if (x - a <= eps)
+			if (Math.abs(x - a) <= eps)
 			{
 				returnIntervals[0] = x;
 				returnIntervals[1] = x;
@@ -135,7 +135,7 @@ public class main {
 		double x = start;
 	    System.out.printf( "%-5s %-12s %-12s\n", "n", "x", "f_x");	
 
-		while (solveFunction(eq, x) > eps)
+		while (Math.abs(solveFunction(eq, x)) > eps)
 		{
 			x = x - (solveFunction(eq, x)/derivative(eq, x));
 			double f_x = solveFunction(eq, x);
